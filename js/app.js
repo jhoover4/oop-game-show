@@ -11,7 +11,11 @@ document.getElementById("btn__reset").addEventListener("click", () => {
 });
 
 document.getElementById("qwerty").addEventListener("click", e => {
-  game.handleInteractionClick(e.target);
+  const clickedElement = e.target;
+
+  if (clickedElement.classList.contains("key")) {
+    game.handleInteractionClick(clickedElement);
+  }
 });
 
 document.addEventListener("keyup", e => {

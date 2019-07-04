@@ -8,7 +8,7 @@ class Game {
   constructor() {
     this.imgPath = "./images";
     this.maxLives = 5;
-    this.phrases = ["test", "a space", "simple"];
+    this.phrases = ["foo", "bar", "cat", "two words", "Three word guess"];
 
     this._resetGame();
   }
