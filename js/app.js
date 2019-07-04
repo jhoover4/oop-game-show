@@ -13,7 +13,10 @@ document.getElementById("btn__reset").addEventListener("click", () => {
 document.getElementById("qwerty").addEventListener("click", e => {
   const clickedElement = e.target;
 
-  if (clickedElement.classList.contains("key")) {
+  if (
+    clickedElement.classList.contains("key") &&
+    !clickedElement.classList.contains("chosen")
+  ) {
     game.handleInteractionClick(clickedElement);
   }
 });

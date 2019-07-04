@@ -30,6 +30,8 @@ class Game {
    * @param {HTMLButtonElement} button - The clicked button element.
    */
   handleInteractionClick(clickedBtn) {
+    clickedBtn.classList.add("chosen");
+
     const letterVal = clickedBtn.textContent;
 
     this._handleInteraction(letterVal);
@@ -40,9 +42,19 @@ class Game {
    *
    * @param {string} letterVal
    */
-  handleInteractionKeyboard(pressedKey) {
-    if (pressedKey.match(/^[a-zA-Z]{1}$/)) {
-      this._handleInteraction(pressedKey);
+  handleInteractionKeyboard(pressedKeyVal) {
+    if (pressedKeyVal.match(/^[a-zA-Z]{1}$/)) {
+      let chosenKey;
+      for (const key of document.querySelectorAll(".key")) {
+        if (key.textContent === pressedKeyVal) {
+          chosenKey = key;
+        }
+      }
+
+      if (!chosenKey.classList.contains("chosen")) {
+        chosenKey.classList.add("chosen");
+        this._handleInteraction(pressedKeyVal);
+      }
     }
   }
 
@@ -135,6 +147,7 @@ class Game {
     this.gameWon = false;
 
     this._resetLives();
+    this._resetKeyboard();
   }
 
   /**
@@ -148,5 +161,16 @@ class Game {
     for (const lifeHtml of lives) {
       lifeHtml.src = `${this.imgPath}/liveHeart.png`;
     }
+  }
+
+  /**
+   * Sets all key buttons back to an unchosen state.
+   *
+   * @private
+   */
+  _resetKeyboard() {
+    const keyElements = document.querySelectorAll(".key");
+
+    keyElements.forEach(el => el.classList.remove("chosen"));
   }
 }
