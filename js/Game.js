@@ -44,12 +44,7 @@ class Game {
    */
   handleInteractionKeyboard(pressedKeyVal) {
     if (pressedKeyVal.match(/^[a-zA-Z]{1}$/)) {
-      let chosenKey;
-      for (const key of document.querySelectorAll(".key")) {
-        if (key.textContent === pressedKeyVal) {
-          chosenKey = key;
-        }
-      }
+      const chosenKey = this._getKeyBtnFromLetterValue(pressedKeyVal);
 
       if (!chosenKey.classList.contains("chosen")) {
         chosenKey.classList.add("chosen");
@@ -71,10 +66,24 @@ class Game {
         this._gameOver(true);
       }
     } else {
+      this._markWrong(letterVal);
       this._removeLife();
 
       if (this.missed === this.maxLives) {
         this._gameOver(false);
+      }
+    }
+  }
+
+  _markWrong(letterVal) {
+    const chosenKey = this._getKeyBtnFromLetterValue(letterVal);
+    chosenKey.classList.add("wrong");
+  }
+
+  _getKeyBtnFromLetterValue(letterVal) {
+    for (const key of document.querySelectorAll(".key")) {
+      if (key.textContent === letterVal) {
+        return key;
       }
     }
   }
@@ -171,6 +180,9 @@ class Game {
   _resetKeyboard() {
     const keyElements = document.querySelectorAll(".key");
 
-    keyElements.forEach(el => el.classList.remove("chosen"));
+    keyElements.forEach(el => {
+      el.classList.remove("chosen");
+      el.classList.remove("wrong");
+    });
   }
 }
