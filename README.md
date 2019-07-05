@@ -14,3 +14,7 @@ incorrectly five times, a losing screen appears.
 
 A player can guess a letter only once. After they’ve guessed a letter, the app will disable that letter on the onscreen 
 keyboard.
+
+## Style Changes
+
+Custom styles have been added to make the app more mobile friendly.
