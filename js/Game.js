@@ -10,6 +10,10 @@ class Game {
     this.maxLives = 5;
     this.phrases = ["foo", "bar", "cat", "two words", "Three word guess"];
 
+    this.activePhrase = null;
+    this.missed = 0;
+    this.gameWon = false;
+
     this._resetGame();
   }
 
